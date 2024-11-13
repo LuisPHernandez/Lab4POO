@@ -27,7 +27,27 @@ public class Carro implements BMWClaseA {
     private String fechaDeMantenimiento;
 
     //Métodos
-    public Carro(){
+    public Carro(int temperaturaExt){
+        this.encendido = false;
+        this.temperaturaInt = 20;
+        this.modoAutomatico = false;
+        this.temperaturaExt = temperaturaExt;
+    }
 
+    public void encender(){
+        this.encendido = true;
+    }
+
+    public void apagar(){
+        this.encendido = false;
+    }
+
+    public void ajustarTemperatura(int incremento){
+        this.temperaturaInt += incremento;
+    }
+
+    public void activarModoAutomatico(){
+        this.modoAutomatico = true;
+        this.temperaturaInt = this.temperaturaExt;
     }
 }
