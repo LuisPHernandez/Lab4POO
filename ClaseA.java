@@ -26,6 +26,9 @@ public class ClaseA implements BMWClaseA {
     private String fechaDeMantenimiento;
 
     //Métodos
+    /**
+     * 
+     */
     public ClaseA(){
         this.encendido = false;
         this.temperaturaInt = 20;
