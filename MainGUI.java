@@ -197,6 +197,17 @@ public class MainGUI {
             }
         });
 
+        JButton cicloIonizadorBtn = new JButton("Purificación profunda");
+        cicloIonizadorBtn.addActionListener(e -> {
+            if (sistemaEncendido) {
+                String mensaje = carro.cicloIonizador();
+                outputArea.append(mensaje + "\n");
+            }
+            else {
+                outputArea.append("El sistema está apagado\n");
+            }
+        });
+
         JButton ionizadorAutoLimpiezaBtn = new JButton("Auto Limpieza Ionizador");
         ionizadorAutoLimpiezaBtn.addActionListener(e -> {
             if (sistemaEncendido) {
@@ -315,6 +326,7 @@ public class MainGUI {
         frame.add(ionizadorBtn);
         frame.add(autoIonizadorBtn);
         frame.add(ajustarIonizadorBtn);
+        frame.add(cicloIonizadorBtn);
         frame.add(ionizadorAutoLimpiezaBtn);
         frame.add(modoBajoConsumoBtn);
         frame.add(crearPerfilBtn);
