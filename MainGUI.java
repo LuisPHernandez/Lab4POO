@@ -1,8 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.*;
 
 public class MainGUI {
     private static boolean sistemaEncendido = false;
@@ -279,28 +279,30 @@ public class MainGUI {
            }
         });
 
+        //Función que muestra el historial de mantenimientos
         JButton historialMantenimientoBtn = new JButton("Historial de Mantenimiento");
         historialMantenimientoBtn.addActionListener(e -> {
             if (sistemaEncendido) {
-                String historial = carro.historialMantenimiento();
-                if (historial != null && !historial.trim().isEmpty()) {
+                String historial = carro.historialMantenimiento(); //Se llama a la función con el carro
+                if (historial != null && !historial.trim().isEmpty()) { //Se valida que ya exista un historial de mantenimiento
                     outputArea.append("Historial de mantenimiento:\n" + historial + "\n");
                 } else {
                     outputArea.append("No hay historial de mantenimiento disponible\n");
                 }
             }
             else {
-                outputArea.append("El sistema está apagado\n");
+                outputArea.append("El sistema está apagado\n"); //Validacion que no haga nada si está apagado el sistema
             }
         });
 
+        //Función que programa el mantenimiento
         JButton programarMantenimientoBtn = new JButton("Programar Mantenimiento");
         programarMantenimientoBtn.addActionListener(e -> {
             if (sistemaEncendido) {
                 String fechaStr = JOptionPane.showInputDialog("Ingrese la fecha de mantenimiento (dd/mm/yyyy):");
                 try {
                     Date fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fechaStr);
-                    carro.programarMantenimiento(fecha);
+                    carro.programarMantenimiento(fecha); //Llama a la función en la interfaz
                     outputArea.append("Mantenimiento programado para " + fechaStr + "\n");
                 } catch (ParseException ex) {
                     outputArea.append("Fecha inválida\n");
