@@ -17,10 +17,11 @@ public class Carro implements BMWClaseA {
     private String intensidadIonizador;
     private String calidadDeAire;
     private int ionizadorAutolimpieza;
-    private ArrayList<Object> perfil1;
-    private ArrayList<Object> perfil2;
-    private ArrayList<Object> perfil3;
-    private ArrayList<String> historialMantenimienot;
+    private int numeroPerfiles;
+    private ArrayList<String> perfil1;
+    private ArrayList<String> perfil2;
+    private ArrayList<String> perfil3;
+    private ArrayList<String> historialMantenimiento;
     private String fechaDeMantenimiento;
 
     //Métodos
@@ -40,6 +41,10 @@ public class Carro implements BMWClaseA {
         Random random = new Random();
         this.calidadDeAire = random.nextBoolean() ? "buena" : "mala";
         this.ionizadorAutolimpieza = 0;
+        this.numeroPerfiles = 0;
+        this.perfil1 = new ArrayList<>();
+        this.perfil2 = new ArrayList<>();
+        this.perfil3 = new ArrayList<>();
     }
 
     public void encender(){
@@ -159,4 +164,31 @@ public class Carro implements BMWClaseA {
             this.intensidadIonizador = "bajo";
         }
     }
+
+    public void crearPerfil(String nombre) {
+        ArrayList<String> perfil = new ArrayList<>();
+
+        perfil.add(nombre);
+        perfil.add(String.valueOf(this.temperaturaInt));
+        perfil.add(String.valueOf(this.nivelVentilacion));
+        perfil.add(this.direccionVentilacion);
+        perfil.add(String.valueOf(this.circulacionInterna));
+        perfil.add(String.valueOf(this.nivelCalefaccionAsientos));
+        perfil.add(this.nivelCalefaccionVolante);
+        perfil.add(String.valueOf(this.calefaccionRapida));
+        perfil.add(String.valueOf(this.desempañador));
+        perfil.add(String.valueOf(this.ionizador));
+        perfil.add(this.intensidadIonizador);
+
+        if (numeroPerfiles == 0) {
+            perfil1 = perfil;
+        } else if (numeroPerfiles == 1) {
+            perfil2 = perfil;
+        } else if (numeroPerfiles == 2) {
+            perfil3 = perfil;
+        }
+        numeroPerfiles ++;
+    }
+
+
 }
