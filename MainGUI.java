@@ -240,12 +240,13 @@ public class MainGUI {
             
         });
 
+        //Función para crear un perfil nuevo
         JButton crearPerfilBtn = new JButton("Crear Perfil");
         crearPerfilBtn.addActionListener(e -> {
             if (sistemaEncendido) {
                 String nombrePerfil = JOptionPane.showInputDialog("Ingrese el nombre del nuevo perfil:");
-                if (nombrePerfil != null && !nombrePerfil.trim().isEmpty()) {
-                    carro.crearPerfil(nombrePerfil.trim());
+                if (nombrePerfil != null && !nombrePerfil.trim().isEmpty()) { //Se valida que el nombre sea válido
+                    carro.crearPerfil(nombrePerfil.trim()); //Se llama a la función que crea el perfil
                     outputArea.append("Perfil " + nombrePerfil + " creado exitosamente\n");
                 } 
                 else {
@@ -257,13 +258,14 @@ public class MainGUI {
             }
         });
 
+        //Función para elegir un perfil al entrar al carro
         JButton elegirPerfilBtn = new JButton("Elegir Perfil");
         elegirPerfilBtn.addActionListener(e -> {
             if (sistemaEncendido) {
                 String nombrePerfil = JOptionPane.showInputDialog("Ingrese el nombre del perfil a seleccionar:");
-                if (nombrePerfil != null && !nombrePerfil.trim().isEmpty()) {
+                if (nombrePerfil != null && !nombrePerfil.trim().isEmpty()) { //Se valida que si exista el perfil
                     try {
-                        carro.elegirPerfil(nombrePerfil.trim());
+                        carro.elegirPerfil(nombrePerfil.trim()); //Se selecciona el perfil
                         outputArea.append("Perfil " + nombrePerfil + " seleccionado\n");
                     } catch (Exception ex) {
                         outputArea.append("El perfil " + nombrePerfil + " no existe\n");
@@ -277,10 +279,11 @@ public class MainGUI {
             }
         });
 
+        //Función para realizar un mantenimiento
         JButton mantenimientoBtn = new JButton("Realizar Mantenimiento");
         mantenimientoBtn.addActionListener(e -> {
             if (sistemaEncendido) {
-                boolean necesario = carro.mantenimiento();
+                boolean necesario = carro.mantenimiento(); //Se llama a la función del carro
                 outputArea.append(necesario ? "Mantenimiento realizado, fecha guardada en historial\n" : "No es necesario el mantenimiento\n");
             }
            else {
