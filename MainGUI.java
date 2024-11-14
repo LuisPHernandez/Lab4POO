@@ -5,8 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainGUI {
+    /**
+     *
+     */
     private static boolean sistemaEncendido = false;
+    /**
+     *
+     */
     private static boolean desempañadorActivo = false; 
+    /**
+     *
+     */
     private static boolean ionizadorActivo = false;
 
     public static void main(String[] args) {
