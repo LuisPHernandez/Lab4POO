@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Date;
 
-public class Carro implements BMWClaseA {
+public class ClaseA implements BMWClaseA {
     //Atributos
     private boolean encendido;
     private int temperaturaInt;
@@ -25,7 +26,7 @@ public class Carro implements BMWClaseA {
     private String fechaDeMantenimiento;
 
     //Métodos
-    public Carro(){
+    public ClaseA(){
         this.encendido = false;
         this.temperaturaInt = 20;
         this.temperaturaExt = 26;
@@ -42,9 +43,11 @@ public class Carro implements BMWClaseA {
         this.calidadDeAire = random.nextBoolean() ? "buena" : "mala";
         this.ionizadorAutolimpieza = 0;
         this.numeroPerfiles = 0;
-        this.perfil1 = new ArrayList<>();
-        this.perfil2 = new ArrayList<>();
-        this.perfil3 = new ArrayList<>();
+        this.perfil1 = new ArrayList<String>();
+        this.perfil2 = new ArrayList<String>();
+        this.perfil3 = new ArrayList<String>();
+        this.historialMantenimiento = new ArrayList<String>();
+        this.fechaDeMantenimiento = "";
     }
 
     public void encender(){
@@ -166,29 +169,73 @@ public class Carro implements BMWClaseA {
     }
 
     public void crearPerfil(String nombre) {
-        ArrayList<String> perfil = new ArrayList<>();
+        if (encendido){
+            ArrayList<String> perfil = new ArrayList<>();
 
-        perfil.add(nombre);
-        perfil.add(String.valueOf(this.temperaturaInt));
-        perfil.add(String.valueOf(this.nivelVentilacion));
-        perfil.add(this.direccionVentilacion);
-        perfil.add(String.valueOf(this.circulacionInterna));
-        perfil.add(String.valueOf(this.nivelCalefaccionAsientos));
-        perfil.add(this.nivelCalefaccionVolante);
-        perfil.add(String.valueOf(this.calefaccionRapida));
-        perfil.add(String.valueOf(this.desempañador));
-        perfil.add(String.valueOf(this.ionizador));
-        perfil.add(this.intensidadIonizador);
-
-        if (numeroPerfiles == 0) {
-            perfil1 = perfil;
-        } else if (numeroPerfiles == 1) {
-            perfil2 = perfil;
-        } else if (numeroPerfiles == 2) {
-            perfil3 = perfil;
-        }
-        numeroPerfiles ++;
+            perfil.add(nombre);
+            perfil.add(String.valueOf(this.temperaturaInt));
+            perfil.add(String.valueOf(this.nivelVentilacion));
+            perfil.add(this.direccionVentilacion);
+            perfil.add(String.valueOf(this.circulacionInterna));
+            perfil.add(String.valueOf(this.nivelCalefaccionAsientos));
+            perfil.add(this.nivelCalefaccionVolante);
+            perfil.add(String.valueOf(this.calefaccionRapida));
+            perfil.add(String.valueOf(this.desempañador));
+            perfil.add(String.valueOf(this.ionizador));
+            perfil.add(this.intensidadIonizador);
+    
+            if (numeroPerfiles == 0) {
+                perfil1 = perfil;
+            } else if (numeroPerfiles == 1) {
+                perfil2 = perfil;
+            } else if (numeroPerfiles == 2) {
+                perfil3 = perfil;
+            }
+            numeroPerfiles ++;
+        }   
     }
 
+    public void elegirPerfil(String nombre) {
+        if (encendido) {
+            ArrayList<String> perfil = null;
 
+            if (perfil1 != null && perfil1.get(0).equals(nombre)) {
+                perfil = perfil1;
+            } else if (perfil2 != null && perfil2.get(0).equals(nombre)) {
+                perfil = perfil2;
+            } else if (perfil3 != null && perfil3.get(0).equals(nombre)) {
+                perfil = perfil3;
+            }
+
+            if (perfil != null) {
+                this.temperaturaInt = Integer.parseInt(perfil.get(1));
+                this.nivelVentilacion = Integer.parseInt(perfil.get(2));
+                this.direccionVentilacion = perfil.get(3);
+                this.circulacionInterna = Boolean.parseBoolean(perfil.get(4));
+                this.nivelCalefaccionAsientos = Integer.parseInt(perfil.get(5));
+                this.nivelCalefaccionVolante = perfil.get(6);
+                this.calefaccionRapida = Boolean.parseBoolean(perfil.get(7));
+                this.desempañador = Boolean.parseBoolean(perfil.get(8));
+                this.ionizador = Boolean.parseBoolean(perfil.get(9));
+                this.intensidadIonizador = perfil.get(10);
+            }
+        } 
+    }
+
+    public boolean mantenimiento() {
+        Random random = new Random();
+        boolean mantenimiento = random.nextBoolean();
+        Date fechaActual = new Date();
+        String fechaString = fechaActual.toString();
+        this.historialMantenimiento.add(fechaString);
+        return mantenimiento;
+    }
+
+    public String historialMantenimiento() {
+        return String.join(", ", historialMantenimiento);
+    }
+
+    public void programarMantenimiento(Date fecha) {
+        this.fechaDeMantenimiento = fecha.toString();
+    }
 }
