@@ -225,9 +225,11 @@ public class ClaseA implements BMWClaseA {
     public boolean mantenimiento() {
         Random random = new Random();
         boolean mantenimiento = random.nextBoolean();
-        Date fechaActual = new Date();
-        String fechaString = fechaActual.toString();
-        this.historialMantenimiento.add(fechaString);
+        if (mantenimiento = true) {
+            Date fechaActual = new Date();
+            String fechaString = fechaActual.toString();
+            this.historialMantenimiento.add(fechaString);
+        }
         return mantenimiento;
     }
 
